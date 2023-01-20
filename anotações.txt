@@ -1,0 +1,104 @@
+Criando uma api
+
+- npm init -y
+- npm i fastify
+- npm i typescript -D
+- npx tsc --init
+
+Alterar o tsconfig.json
+Trocar  "target": "es2016",
+por 	"target": "es2020",   Features mais recentes
+
+- npx tsc --init (Executa o código sem precisar fazer a conversão de TS para JS)
+
+Automatizando o processo
+"scripts": {
+    "dev": "tsx watch src/server.ts"
+}
+
+
+FRAMEWORK NODE FASTIFY Semelhando ao express
+- VER DOCumentação
+
+BANCO DE DADOS
+1 - DRIVER NATIVO (mysql)
+2 - QUERYBUILDER (knex.JS)
+3 - ORM (PRISMA)
+
+INSTALANDO O PRISMA
+- npm i prisma -D
+- npm i @prisma/client
+
+RODANDO O PRISMA
+- npx prisma init --datasource-provider SQLite
+
+RODANDO AS MIGRATIONS DO PRISMA
+- npx prisma migrate dev
+
+VISUALIZANDO O BANCO DE DADOS
+- npx prisma studio
+
+CORS - MECANISMOS DE SEGURANÇA, NA HORA DE ACESSAR A API
+-  
+
+Adicionar a configuração no arquivo settings.json do vscode pra salvar automaticamente alteraçoes nos Models do PRISMA
+ 
+ "[prisma]": {
+        "editor.formatOnSave": true
+    },
+
+INSTALAR 2 BIBLIOTECAS PARA VISUALIZAR OS DIAGRAMAS DA TABELAS
+
+* DOCUMENTAÇÃO: => https://www.npmjs.com/package/prisma-erd-generator
+
+- npm i -D prisma-erd-generator @mermaid-js/mermaid-cli 
+
+ADICIONAR NO PRISMA A SEGUINTE CONFIGURAÇÃO:
+
+generator erd {
+  provider = "prisma-erd-generator"
+}
+
+RODAR O COMANDO
+- npx prisma generate 
+
+SEED (UM POPULADOR DE DADOS FAKE) - DOCUMENTAÇÃO
+
+* https://www.prisma.io/docs/guides/database/seed-database 
+
+- CRIE UM ARQUIVO SEED.TS DENTRO DA PASTA DO PRISMA COM AS SEGUINTES CONFIGURAÇÕES:
+
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
+
+async function main() {
+ 
+ 
+}
+
+main()
+  .then(async () => {
+    await prisma.$disconnect()
+  })
+  .catch(async (e) => {
+    console.error(e)
+    await prisma.$disconnect()
+    process.exit(1)
+  }) 
+
+ADICIONAR AS CONFIGURAÇÕES AO FINAL DO ARQUIVO PACKAGE.JSON
+  
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  }
+
+
+EXECUTANDO O SEED COM O PRISMA
+- npx prisma db seed
+
+VALIDAÇÃO DE DADOS COM ZOD
+- npm i zod
+
+TRABALHANDO COM DATAS COM DAYJS
+- npm i dayjs
