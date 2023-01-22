@@ -15,6 +15,7 @@ app.register(appRoutes)
 
 app.listen({
   port: 3333,
-}).then(() => {
-  console.log('HTTP Server is running!')
+  host: '0.0.0.0', //O Fastify Não aceita conexão com IP: Apenas com local host, isso evita error de [AxiosError: Network Error].
+}).then((url) => {
+  console.log(`HTTP Server running on ${url}`)
 })
